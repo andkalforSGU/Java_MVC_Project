@@ -27,48 +27,50 @@ public class MainController {
     public String main(Map<String, Object> model) {
         Iterable<Massage> messages = messagesRepos.findAll();
 
-        model.put("messages", messages);
-        return "main";
+        return(homePage(model, messages));
     }
 
 
 
-    @PostMapping
+    @PostMapping("add")
     public String add(Map<String, Object> model, @RequestParam String text, @RequestParam String tag){
         Massage message = new Massage(text, tag);
         messagesRepos.save(message);
-        Iterable<Massage> massages = messagesRepos.findAll();
+        Iterable<Massage> messages = messagesRepos.findAll();
 
-        model.put("messages", massages);
-        return "main";
+        return(homePage(model, messages));
     }
 
     @PostMapping("filter")
     public String filter(Map<String, Object> model, @RequestParam String filter) {
 
-        Iterable<Massage> massages;
+        Iterable<Massage> messages;
         if (filter != null && !filter.isEmpty()){
-            massages = messagesRepos.findByTag(filter);
-        } else massages = messagesRepos.findAll();
+            messages = messagesRepos.findByTag(filter);
+        } else messages = messagesRepos.findAll();
 
-        model.put("messages", massages);
-        return "main";
+        return(homePage(model, messages));
     }
 
     @PostMapping("deleteAll")
     public String deleteAll(Map<String, Object> model) {
 
-        Iterable<Massage> massages;
+        Iterable<Massage> messages;
         messagesRepos.deleteAll();
-        massages = messagesRepos.findAll();
+        messages = messagesRepos.findAll();
 
-        model.put("messages", massages);
-        return "main";
+        return(homePage(model, messages));
     }
 
     @PostMapping("home")
     public String home(Map<String, Object> model){
         Iterable<Massage> messages = messagesRepos.findAll();
+        //model.put("messages", messages);
+        //return "main";
+        return(homePage(model, messages));
+    }
+
+    private String homePage(Map<String, Object> model, Iterable<Massage> messages){
         model.put("messages", messages);
         return "main";
     }
