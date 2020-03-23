@@ -1,7 +1,7 @@
 package com.example.servingwebcontent;
 
 import com.example.servingwebcontent.entities.Massage;
-import com.example.servingwebcontent.repos.MassageRepos;
+import com.example.servingwebcontent.repos.MessageRepos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class GreetingController {
 
     @Autowired
-    private MassageRepos massagesRepos;
+    private MessageRepos massagesRepos;
 
     @GetMapping("/greeting")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Map<String, Object> model) {
@@ -24,21 +24,19 @@ public class GreetingController {
 
     @GetMapping
     public String main(Map<String, Object> model) {
-        Iterable<Massage> massages = massagesRepos.findAll();
+        Iterable<Massage> messages = massagesRepos.findAll();
 
-        model.put("massages", massages);
+        model.put("messages", messages);
         return "main";
     }
 
     @PostMapping
     public String add(Map<String, Object> model, @RequestParam String text, @RequestParam String tag){
-        Massage massage = new Massage(text, tag);
-        massagesRepos.save(massage);
-
+        Massage message = new Massage(text, tag);
+        massagesRepos.save(message);
         Iterable<Massage> massages = massagesRepos.findAll();
 
-        model.put("massages", massages);
+        model.put("messages", massages);
         return "main";
     }
-
 }
