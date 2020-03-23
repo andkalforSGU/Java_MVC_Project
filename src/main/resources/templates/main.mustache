@@ -1,0 +1,17 @@
+<html>
+<body>
+    <div>
+        <form method="post">
+            <input type="text" name="text" placeholder="Enter Massage!"/>
+            <input type="text" name="tag" placeholder="tag">
+            <button type="submit">add</button>
+        </form>
+    </div>
+    <div>Massages list</div>
+    {{#massages}}
+        <b>{{id}}</b>
+        <span>{{tag}}</span>
+        <i>{{text}}</i>
+    {{/massages}}
+</body>
+</html>
