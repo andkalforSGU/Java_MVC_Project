@@ -1,17 +1,25 @@
 <html>
 <body>
+    <form method="post" action="home">
+        <button type="submit">home</button>
+    </form>
     <div>
         <form method="post">
-            <input type="text" name="text" placeholder="Enter Massage!"/>
+            <input type="text" name="text" placeholder="Enter Message!"/>
             <input type="text" name="tag" placeholder="tag">
             <button type="submit">add</button>
         </form>
+        <form method="post" action="filter">
+            <input type="text" name="filter">
+            <button type="submit">find</button>
+        </form>
     </div>
-    <div>Massages list</div>
-    {{#massages}}
-        <b>{{id}}</b>
-        <span>{{tag}}</span>
-        <i>{{text}}</i>
-    {{/massages}}
+    <div>Messages list:</div>
+    {{#messages}}
+        <div>
+            <span>{{tag}}</span>
+            <i>{{text}}</i>
+        </div>
+    {{/messages}}
 </body>
 </html>
