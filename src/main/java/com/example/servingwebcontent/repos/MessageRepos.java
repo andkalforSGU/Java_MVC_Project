@@ -8,5 +8,6 @@ import java.util.List;
 public interface MessageRepos extends CrudRepository<Massage, Integer> {
 
     List<Massage>findByTag(String tag);
+    void deleteByTag(String tag);
 
 }

@@ -46,7 +46,21 @@ public class MainController {
     @PostMapping("filter")
     public String filter(Map<String, Object> model, @RequestParam String filter) {
 
-        List<Massage> massages = messagesRepos.findByTag(filter);
+        Iterable<Massage> massages;
+        if (filter != null && !filter.isEmpty()){
+            massages = messagesRepos.findByTag(filter);
+        } else massages = messagesRepos.findAll();
+
+        model.put("messages", massages);
+        return "main";
+    }
+
+    @PostMapping("deleteAll")
+    public String deleteAll(Map<String, Object> model) {
+
+        Iterable<Massage> massages;
+        messagesRepos.deleteAll();
+        massages = messagesRepos.findAll();
 
         model.put("messages", massages);
         return "main";
