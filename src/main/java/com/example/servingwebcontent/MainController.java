@@ -18,8 +18,8 @@ public class MainController {
     private MessageRepos messagesRepos;
 
     @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Map<String, Object> model) {
-        model.put("name", name);
+    public String greeting(Map<String, Object> model) {
+
         return "greeting";
     }
 
